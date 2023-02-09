@@ -92,8 +92,24 @@
         guessInput.disabled = true;
         return;
       }
+      
+      if (attempts === 1) {
+        message.textContent =
+          "One Last Chance";
+        submitBtn.disabled = false;
+        guessInput.disabled = false;
+        return;
+      }
+      
+      if (attempts === 2) {
+        message.textContent =
+          "Nope, Try a little bit harder";
+        submitBtn.disabled = false;
+        guessInput.disabled = false;
+        return;
+      }
 
-      message.textContent = "Wrong! You have " + attempts + " attempts left.";
+      message.textContent = "-";
     });
   </script>
 </body>
