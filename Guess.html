@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Guessing Game</title>
+  <style>
+    body {
+      background-color: lightgray;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 100px;
+    }
+
+    h1 {
+      font-size: 36px;
+      color: blue;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+
+    input[type="text"] {
+      padding: 20px;
+      font-size: 26px;
+      border-radius: 10px;
+      border: 1px solid blue;
+      margin-top: 20px;
+      width: 50px;
+      text-align: center;
+    }
+
+    button {
+      padding: 20px 40px;
+      border-radius: 10px;
+      background-color: blue;
+      color: white;
+      margin-top: 20px;
+      cursor: pointer;
+    }
+
+    .message {
+      font-size: 18px;
+      margin-top: 20px;
+      color: blue;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Guessing Game</h1>
+    <p>Guess a number between 1 and 10 and you only have three chances, Good luck!</p>
+    <input type="text" id="guess">
+    <button id="submit">Guess</button>
+    <p class="message"></p>
+  </div>
+
+  <script>
+    const submitBtn = document.querySelector("#submit");
+    const guessInput = document.querySelector("#guess");
+    const message = document.querySelector(".message");
+
+    let correctNumber = Math.floor(Math.random() * 10) + 1;
+    let attempts = 3;
+
+    submitBtn.addEventListener("click", function() {
+      let guess = parseInt(guessInput.value);
+
+      if (isNaN(guess) || guess < 1 || guess > 10) {
+        message.textContent = "Please enter a number between 1 and 10";
+        return;
+      }
+
+      if (guess === correctNumber) {
+        message.textContent = "You won! The number was " + correctNumber;
+        submitBtn.disabled = true;
+        guessInput.disabled = true;
+        return;
+      }
+
+      attempts--;
+      if (attempts === 0) {
+        message.textContent =
+          "You lost! The number was " + correctNumber + ". Better Luck Next Time;)";
+        submitBtn.disabled = true;
+        guessInput.disabled = true;
+        return;
+      }
+
+      message.textContent = "Wrong! You have " + attempts + " attempts left.";
+    });
+  </script>
+</body>
+</html>
